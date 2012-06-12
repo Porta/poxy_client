@@ -1,4 +1,4 @@
-# PoxyClient
+# poxy_client
 
 TODO: Write a gem description
 
