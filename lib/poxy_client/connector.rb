@@ -4,8 +4,9 @@ module PoxyClient
     attr_accessor :request
     attr_accessor :response
 
-    def initialize
+    def initialize(target)
       hydra
+      request(target)
       self
     end
 
@@ -15,13 +16,16 @@ module PoxyClient
 
     def connect
       yield(request)
-      hydra.queue(@request)
-      hydra.run
-      @response = @request.response
     end
 
-    def request
-      @request ||= PoxyClient::Request.new
+    def request(target = "")
+      @request ||= Typhoeus::Request.new(target)
+    end
+
+    def response
+      hydra.queue(request)
+      hydra.run
+      @response = request.response
     end
 
   end

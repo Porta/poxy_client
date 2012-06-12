@@ -1,9 +1,9 @@
-require "poxy_client/version"
-require "poxy_client/configuration"
-require "poxy_client/request"
-require "poxy_client/connector"
-require "poxy_client/retriever"
-require "poxy_client/repeater"
+require "poxy_client/version.rb"
+require "poxy_client/configuration.rb"
+require "poxy_client/request.rb"
+require "poxy_client/connector.rb"
+require "poxy_client/retriever.rb"
+require "poxy_client/repeater.rb"
 
 require "typhoeus"
 

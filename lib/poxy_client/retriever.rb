@@ -8,7 +8,7 @@ module PoxyClient
     attr_reader :mode
     attr_reader :retriever_version
 
-    REQUESTS_URI = '/api/v1/requests'.freeze
+    REQUESTS_URI = '/api/v1/requests/all'.freeze
 
     def initialize(options = {})
       [ :api_key,
@@ -25,10 +25,9 @@ module PoxyClient
 
     def get
       #TODO: move to a factory
-      @connector = PoxyClient::Connector.new
+      @connector = PoxyClient::Connector.new(url)
       @connector.connect do |request|
-        request.target = url,
-        request.method = :post,
+        request.method = :post
         request.params = {:bucket_key => @bucket_key, :api_key => @api_key}
       end
       @connector.response
@@ -39,9 +38,18 @@ module PoxyClient
     protected
 
     def url
-      @origin << REQUESTS_URI
+      @origin + REQUESTS_URI
     end
 
 
   end
 end
+
+__END__
+    require 'json'
+
+    requests = JSON.parse(response.body)
+    requests.each do |r|
+      rp = JSON.parse(r)
+      puts rp['body']
+    end

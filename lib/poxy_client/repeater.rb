@@ -13,8 +13,18 @@ module PoxyClient
       end
     end
 
-    def repeat(parameters)
+    def set(json_request)
+      #TODO: move to a factory
+      @connector = PoxyClient::Connector.new(@destination)
+      @connector.connect do |request|
+        request.headers = json_request["headers"]
+        request.method = json_request["method"]
+        request.params = json_request["params"]
+        request.body = ""
 
+      end
+      @connector.response
+      #Do something with response
     end
 
   end
