@@ -1,31 +1,30 @@
+
 module PoxyClient
   class Connector
 
+    attr_accessor :method
     attr_accessor :request
     attr_accessor :response
 
-    def initialize(target)
-      hydra
-      request(target)
-      self
+    def initialize
+      HTTPI.adapter = :curb
     end
 
-    def hydra
-      @hydra ||= Typhoeus::Hydra.new
-    end
 
     def connect
       yield(request)
     end
 
-    def request(target = "")
-      @request ||= Typhoeus::Request.new(target)
+    def request
+      @request ||= HTTPI::Request.new
+    end
+
+    def method
+      @method ||= @request.method.downcase
     end
 
     def response
-      hydra.queue(request)
-      hydra.run
-      @response = request.response
+      @response = HTTPI.send(method, @request)
     end
 
   end

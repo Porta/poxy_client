@@ -4,8 +4,8 @@ require "poxy_client/request.rb"
 require "poxy_client/connector.rb"
 require "poxy_client/retriever.rb"
 require "poxy_client/repeater.rb"
-
-require "typhoeus"
+require "httpi"
+require "httpi_request"
 
 module PoxyClient
 

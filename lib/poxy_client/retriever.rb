@@ -25,13 +25,13 @@ module PoxyClient
 
     def get(how_many = "all")
       #TODO: move to a factory
-      @connector = PoxyClient::Connector.new build_url(how_many)
+      @connector = PoxyClient::Connector.new
       @connector.connect do |request|
         request.method = :post
-        request.params = {:bucket_key => @bucket_key, :api_key => @api_key}
+        request.url =  build_url(how_many)
+        request.body = {:bucket_key => @bucket_key, :api_key => @api_key}
       end
       @connector.response
-      #Do something with response
     end
 
 

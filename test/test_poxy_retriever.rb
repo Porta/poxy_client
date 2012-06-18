@@ -20,7 +20,7 @@ class PoxyRetrieverTest < Test::Unit::TestCase
 
   def test_retriever_get
     response = @retriever.get(:all)
-    assert_equal response.class, Typhoeus::Response
+    assert_equal response.class, HTTPI::Response
   end
 
   

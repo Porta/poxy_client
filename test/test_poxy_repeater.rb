@@ -7,7 +7,7 @@ class PoxyRepeaterTest < Test::Unit::TestCase
   def setup
   	
     PoxyClient.configure do |config|
-      config.destination = "http://localhost:9292"
+      config.destination = "http://localhost:9393"
       config.method = "post"
     end
     @repeater = PoxyClient.repeater
@@ -22,7 +22,7 @@ class PoxyRepeaterTest < Test::Unit::TestCase
 
   def test_repeater_set
 	response = @repeater.set(@json_request)
-	assert_equal response.class, Typhoeus::Response
+	assert_equal response.class, HTTPI::Response
   end
 
 end

@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{Poxy is a website that captures requests and let's you retrieve and regenerate those requests to your local app}
   gem.homepage      = "http://poxy.porta.sh"
 
-  gem.add_runtime_dependency "typhoeus", [">= 0.3.3"]
-
+  gem.add_runtime_dependency "httpi", [">= 1.0.0"]
+  
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
