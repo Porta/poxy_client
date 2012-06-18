@@ -1,6 +1,5 @@
 require "poxy_client/version.rb"
 require "poxy_client/configuration.rb"
-require "poxy_client/request.rb"
 require "poxy_client/connector.rb"
 require "poxy_client/retriever.rb"
 require "poxy_client/repeater.rb"

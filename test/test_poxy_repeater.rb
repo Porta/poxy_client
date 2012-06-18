@@ -3,7 +3,6 @@ require 'poxy_client'
 require 'json'
 
 class PoxyRepeaterTest < Test::Unit::TestCase
-
   def setup
   	
     PoxyClient.configure do |config|
