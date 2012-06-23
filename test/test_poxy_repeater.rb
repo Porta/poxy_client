@@ -6,7 +6,7 @@ class PoxyRepeaterTest < Test::Unit::TestCase
   def setup
   	
     PoxyClient.configure do |config|
-      config.destination = "http://localhost:9393"
+      config.destination = "http://postbin.heroku.com/56a0320c"
       config.method = "post"
     end
     @repeater = PoxyClient.repeater

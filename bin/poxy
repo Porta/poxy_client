@@ -1,0 +1,9 @@
+#!/usr/bin/ruby
+
+require 'rubygems'
+require 'clap'
+require 'poxy_client'
+
+trap(:INT) do
+  puts "CHAUCHAU CHAUUUUU"
+end
