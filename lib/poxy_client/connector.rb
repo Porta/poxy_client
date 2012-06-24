@@ -6,7 +6,7 @@ module PoxyClient
     attr_accessor :request
     attr_accessor :response
 
-    def initialize
+    def initialize(conf)
       HTTPI.adapter = :curb
     end
 

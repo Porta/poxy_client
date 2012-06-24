@@ -13,17 +13,19 @@ module PoxyClient
       end
     end
 
-    def set(json_request)
-      #TODO: move to a factory
+    def set(json_array)
+      @result = []
       @connector = PoxyClient::Connector.new()
-      @connector.connect do |request|
-        request.method = json_request["method"]
-        request.url = @destination
-        request.headers = json_request["headers"]
-        request.body = json_request["params"]
+      json_array.each do |request|
+        @connector.connect do |request|
+          request.method = request["method"]
+          request.url = @destination
+          request.headers = request["headers"]
+          request.body = request["params"]
+        end
+        @result << @connector.response
       end
-      @connector.response
-      #Do something with response
+      @result
     end
 
   end
