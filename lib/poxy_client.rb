@@ -38,7 +38,11 @@ module PoxyClient
       @connector ||= PoxyClient::Connector.new(configuration)
     end
 
-
+    def perform(howmany = :all)
+      requests = PoxyClient.retriever.get(howmany)
+      parsed = PoxyClient.processor.parse(requests)
+      result = PoxyClient.repeater.set(parsed)
+    end
 
   end
 end

@@ -39,12 +39,13 @@ if opts[:daemonize]
 end
 
 if opts[:config_file]
+
   File.read( opts[:config_file] ).scan(/(.*?)="?(.*)"?$/).each do |key, value|
     config[key] ||= value
   end
 
   PoxyClient.configure do |c|
-    c.origin = "http://localhost:9393"
+    c.origin = config["origin"]
     c.api_key = config["api"]
     c.bucket_key = config["bucket"]
     c.destination = config["destination"]
@@ -56,8 +57,9 @@ end
 
 #run code here
 while @continue do
-  requests = PoxyClient.retriever.get(:all)
-  parsed = PoxyClient.processor.parse(requests)
-  result = PoxyClient.repeater.set(parsed)
+  #requests = PoxyClient.retriever.get(:all)
+  #parsed = PoxyClient.processor.parse(requests)
+  #result = PoxyClient.repeater.set(parsed)
+  PoxyClient.perform
   sleep config["interval"].to_i
 end
