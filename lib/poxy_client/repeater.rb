@@ -1,10 +1,7 @@
 module PoxyClient
   class Repeater
 
-    attr_accessor :request
-
     attr_reader :destination
-
 
     def initialize(options = {})
       [ :destination
@@ -16,12 +13,12 @@ module PoxyClient
     def set(json_array)
       @result = []
       @connector = PoxyClient::Connector.new()
-      json_array.each do |request|
+      json_array.each do |params|
         @connector.connect do |request|
-          request.method = request["method"]
+          request.method = params["method"]
           request.url = @destination
-          request.headers = request["headers"]
-          request.body = request["params"]
+          request.headers = params["headers"]
+          request.body = params["params"]
         end
         @result << @connector.response
       end

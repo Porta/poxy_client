@@ -1,12 +1,7 @@
-
 module PoxyClient
   class Connector
 
-    attr_accessor :method
-    attr_accessor :request
-    attr_accessor :response
-
-    def initialize(conf)
+    def initialize(options = {})
       HTTPI.adapter = :curb
     end
 
