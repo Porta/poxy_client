@@ -16,7 +16,7 @@ class PoxyProcessorTest < Test::Unit::TestCase
 
 
   def test_parser
-    assert_equal JSON.parse(@raw_request), @parsed_request[0]
+    assert_equal JSON.parse(@raw_request), @parsed_request
   end
 
 end
