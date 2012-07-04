@@ -1,0 +1,6 @@
+-
+lib/**/*.rb
+bin/poxyd.rb
+README.md
+LICENSE.md
+poxy.conf
