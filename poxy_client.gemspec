@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["julian@porta.sh"]
   gem.description   = %q{Client for the Poxy website}
   gem.summary       = %q{Poxy is a website that captures requests and lets you do fun stuff with them}
-  gem.homepage      = "http://poxy.porta.sh"
+  gem.homepage      = "http://porta.github.com/poxy_client"
 
   gem.add_runtime_dependency "httpi", [">= 1.0.0"]
   gem.add_runtime_dependency "clap", [">= 0.0.2"]
