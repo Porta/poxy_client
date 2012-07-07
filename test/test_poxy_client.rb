@@ -5,7 +5,7 @@ require 'json'
 class PoxyClientTest < Test::Unit::TestCase
 
   def test_version
-    assert_equal PoxyClient::VERSION, '0.0.1.pre'
+    assert_equal PoxyClient::VERSION, '0.0.1.pre.1'
   end
 
   def test_config_version
@@ -27,14 +27,5 @@ class PoxyClientTest < Test::Unit::TestCase
     assert_equal @client.configuration.destination, "http://localhost"
   end
 
-  def test_whole_thing
-    PoxyClient.configure do |config|
-      config.origin = "http://poxy.porta.sh"
-      config.api_key = "test"
-      config.bucket_key = "test"
-      config.destination = "http://localhost:9292"
-    end
-    PoxyClient.perform(:all)
-  end
 
 end

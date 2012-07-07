@@ -4,9 +4,10 @@ require File.expand_path('../lib/poxy_client/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Julian Porta"]
   gem.email         = ["julian@porta.sh"]
-  gem.description   = %q{Client for the Poxy website}
+  gem.description   = %q{Client for Poxy (the awesome app)}
   gem.summary       = %q{Poxy is a website that captures requests and lets you do fun stuff with them}
   gem.homepage      = "http://porta.github.com/poxy_client"
+  gem.post_install_message = %q{Thanks for installing poxy_client. Make sure to create an account at http://poxy.porta.sh}
 
   gem.add_runtime_dependency "httpi", [">= 1.0.0"]
   gem.add_runtime_dependency "clap", [">= 0.0.2"]
