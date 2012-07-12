@@ -23,7 +23,7 @@ module PoxyClient
     end
 
 
-    def get(how_many = "all")
+    def get(how_many = :new)
       #TODO: move to a factory
       @connector = PoxyClient::Connector.new
       @connector.connect do |request|

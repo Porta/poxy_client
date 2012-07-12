@@ -24,7 +24,7 @@ class PoxyClientTest < Test::Unit::TestCase
     assert_equal @client.configuration.api_key, "test"
     assert_equal @client.configuration.bucket_key, "test"
     #params by default
-    assert_equal @client.configuration.destination, "http://localhost"
+    assert_equal @client.configuration.destination, "http://localhost:9292"
   end
 
 

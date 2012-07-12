@@ -19,8 +19,26 @@ module PoxyClient
     end
 
     def response
+      downcase_headers
+      replace_host_from_headers
+      puts @request.inspect
       @response = HTTPI.send(method, @request)
     end
 
+    private
+
+    def downcase_headers
+      @replace = {}
+      @request.headers.each_pair do |k,v|
+        @replace.merge!({k.downcase => v})
+      end
+      @request.headers = @replace
+    end
+
+    def replace_host_from_headers
+      @request.headers['host'] = @request.url.host
+    end
+
   end
+
 end

@@ -13,9 +13,9 @@ module PoxyClient
 
     def initialize
       @origin               = 'http://poxy.porta.sh'
-      @destination          = 'http://localhost'
+      @destination          = 'http://localhost:9292'
       @mode                 = 'development'
-      @method               = "post"
+      @method               = 'post'
       @retriever_version    = VERSION
     end
 

@@ -11,7 +11,7 @@ class PoxyProcessorTest < Test::Unit::TestCase
 
 
   def test_parser
-    assert_equal JSON.parse(@raw_request), @parsed_request
+    assert_equal JSON.parse(@raw_request)[0]['HOST'], @parsed_request[0]['X-FORWARDED-FOR']
   end
 
 

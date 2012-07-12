@@ -11,9 +11,6 @@ module PoxyClient
 
   class << self
 
-    #attr_reader :configuration
-
-
     def configure
       yield(configuration)
     end
@@ -35,15 +32,15 @@ module PoxyClient
     end
 
     def connector
-      @connector ||= PoxyClient::Connector.new(configuration)
+      @connector ||= PoxyClien::Connector.new(configuration)
     end
 
     # Encapsulates the three important operations. Retrieve, Process and Repeat
     # 
-    # @params [Symbol] which requests to retrieve from the API.
-    # Options are :all, :first, :last, :starred, :unstarred, :archived
-    # @result [Array] With the responses received in the destination server.
-    def perform(howmany = :all)
+    # @param [Symbol] howmany which requests to retrieve from the API.
+    # Options are :new, :all, :first, :last, :starred, :unstarred, :archived
+    # @return [Array] With the responses received in the destination server.
+    def perform(howmany = :new)
       # Retrieve all the available requests from the site API
       requests = PoxyClient.retriever.get(howmany)
       # Parse those requests to JSON.
