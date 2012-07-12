@@ -21,7 +21,6 @@ module PoxyClient
     def response
       downcase_headers
       replace_host_from_headers
-      puts @request.inspect
       @response = HTTPI.send(method, @request)
     end
 

@@ -5,7 +5,7 @@ require 'json'
 class PoxyClientTest < Test::Unit::TestCase
 
   def test_version
-    assert_equal PoxyClient::VERSION, '0.0.1.pre.1'
+    assert_equal PoxyClient::VERSION, '0.0.1.pre.2'
   end
 
   def test_config_version
