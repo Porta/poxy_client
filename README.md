@@ -1,6 +1,5 @@
 # poxy_client
 
-# submodule
 
 Poxy (http://poxy.porta.sh) is a web application that captures web requests and let's you do fun stuff with them.
 
