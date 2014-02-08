@@ -58,7 +58,7 @@ Being poxy.conf a config file with your own API and Bucket keys.
 
 The code for [PoxyClient](lib/poxy_client.rb) it's pretty straightforward.
 
-The [PoxyClient#perform](lib/poxy_client.rb#perform) perform method encapsulates the 3 important operations the client does.
+The [PoxyClient#perform](lib/poxy_client.rb#L43) perform method encapsulates the 3 important operations the client does.
 
 #### Retrieve
 
