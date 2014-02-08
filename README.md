@@ -1,10 +1,10 @@
 # poxy_client
 
-Poxy (http://poxy.ws) is a web application that captures web requests to let you do fun stuff with them.
+[Poxy](http://poxy.ws) is a web application that captures HTTP requests to let you do fun stuff with them.
 
 Fun things like proxying, forwarding, emailing and some sort of processing (soon!).
 
-In order to use it first you'll need to [create an account](http://poxy.porta.sh/users/sign_up) into the site.
+In order to use it first you'll need to [create an account](http://poxy.ws/register) into the site.
 
 
 ## Installation
@@ -74,22 +74,3 @@ The {PoxyClient.perform perform} method encapsulates the 3 important operations 
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
