@@ -8,28 +8,49 @@ module PoxyClient
     attr_reader :mode
     attr_reader :retriever_version
 
-    REQUESTS_URI = '/api/v1/requests/'.freeze
+    REQUESTS_URI = '/api/requests?'.freeze
 
     def initialize(options = {})
       [ :api_key,
-        :bucket_key,
         :origin,
         :mode,
         :retriever_version
       ].each do |option|
         instance_variable_set("@#{option}", options[option])
       end
-
     end
 
 
-    def get(how_many = :new)
+    #Retrieves requests from API.
+    # @param [Symbol] how_many which requests to retrieve from the API.
+    # Options are :new, :all, :first, :last, :starred, :unstarred, :archived
+    # @return [String] A JSON encoded array of requests.
+    def get(opts = {})
       #TODO: move to a factory
+      copy = {}
+
+      if opts.has_key? :starred
+        copy[:starred] = opts[:starred].to_s
+      end
+
+      if opts.has_key? :archived
+        copy[:archived] = opts[:archived].to_s
+      end
+
+      if opts.has_key? :bucket_ids
+        copy[:bucket_ids] = opts[:bucket_ids]
+      end
+      if opts.has_key? :search
+        copy[:search] = opts[:search].downcase
+      end
+      
+      query = Rack::Utils.build_nested_query(copy)
+
       @connector = PoxyClient::Connector.new
       @connector.connect do |request|
-        request.method = :post
-        request.url =  build_url(how_many)
-        request.body = {:bucket_key => @bucket_key, :api_key => @api_key}
+        request.method = :get
+        request.url =  build_url(query)
+        request.auth.basic(@api_key, "")
       end
       @connector.response
     end
@@ -38,18 +59,9 @@ module PoxyClient
     protected
 
     def build_url(how_many)
-      @origin + REQUESTS_URI + how_many.to_s
+      @origin + REQUESTS_URI + how_many
     end
 
 
   end
 end
-
-__END__
-    require 'json'
-
-    requests = JSON.parse(response.body)
-    requests.each do |r|
-      rp = JSON.parse(r)
-      puts rp['body']
-    end

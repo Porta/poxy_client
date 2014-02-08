@@ -5,7 +5,7 @@ require 'json'
 class PoxyClientTest < Test::Unit::TestCase
 
   def test_version
-    assert_equal PoxyClient::VERSION, '0.0.1.pre.2'
+    assert_equal PoxyClient::VERSION, '0.0.1'
   end
 
   def test_config_version
@@ -15,16 +15,36 @@ class PoxyClientTest < Test::Unit::TestCase
 
   def test_config_block
     PoxyClient.configure do |config|
-      config.api_key = "test"
-      config.bucket_key = "test"
+      config.api_key = "3acb90c157c9f968d4e7d8929fd5264cc2c9693fa67a83911412ef9b6bfa95f6"
+      config.destination = "http://home.herokuapp.com/"
     end
 
     @client = PoxyClient
     #params passed for config
-    assert_equal @client.configuration.api_key, "test"
-    assert_equal @client.configuration.bucket_key, "test"
+    assert_equal @client.configuration.api_key, "3acb90c157c9f968d4e7d8929fd5264cc2c9693fa67a83911412ef9b6bfa95f6"
     #params by default
-    assert_equal @client.configuration.destination, "http://localhost:9292"
+    assert_equal @client.configuration.destination, "http://home.herokuapp.com/"
+  end
+
+  def test_integration
+    PoxyClient.configure do |config|
+      config.origin = "https://poxy.apiary.io"
+      config.api_key = "3acb90c157c9f968d4e7d8929fd5264cc2c9693fa67a83911412ef9b6bfa95f6"
+      config.destination = "http://home.herokuapp.com/"
+    end
+
+    @client = PoxyClient
+    @retriever = PoxyClient.retriever
+    @repeater = PoxyClient.repeater
+    requests = @retriever.get
+    processed = PoxyClient.processor.parse(requests)
+    if processed["code"] == 200
+      processed["items"].each do |request|
+        responses = @repeater.set(request)
+        assert_not_nil responses.first.body.match('manolo')
+        assert_equal responses.first.code, 200
+      end
+    end
   end
 
 

@@ -1,10 +1,10 @@
 # poxy_client
 
-Poxy (http://poxy.porta.sh) is a web application that captures web requests and let's you do fun stuff with them.
+Poxy (http://poxy.ws) is a web application that captures web requests to let you do fun stuff with them.
 
-Fun things like forwarding, emailing and some sort of processing (soon!).
+Fun things like proxying, forwarding, emailing and some sort of processing (soon!).
 
-In order to use it, first you'll need to [register](http://poxy.porta.sh/users/sign_up) into the site.
+In order to use it first you'll need to [create an account](http://poxy.porta.sh/users/sign_up) into the site.
 
 
 ## Installation
@@ -23,13 +23,19 @@ And then execute:
 
     $ gem install poxy_client
 
+## API Blueprint and Documentation
+
+Courtesy of the great service [Apiary.io](http://apiary.io/), here it is:
+[http://docs.poxy.apiary.io/](http://docs.poxy.apiary.io/)
+
 ## Usage
 
 There are a few different ways to use the client.
 
-The distribution includes a executable file that you can use just providing a .config file.
+The distribution includes an executable file that you can use. It requires a .config file.
 
 Or, you can implement your own client suited to your particular needs. Take a look at the executable file, or check the code documentation.
+
 
 
 ### Executable
@@ -50,9 +56,9 @@ Being poxy.conf a config file with your own API and Bucket keys.
 
 ### Custom implementation
 
-Though the code for {PoxyClient poxy_client} it's pretty straightforward, in case you want to take a look.
+The code for {PoxyClient poxy_client} it's pretty straightforward.
 
-The {PoxyClient.perform perform} method encapsulates the 3 important operations the client performs.
+The {PoxyClient.perform perform} method encapsulates the 3 important operations the client does.
 
 #### Retrieve
 

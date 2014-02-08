@@ -1,21 +1,18 @@
 module PoxyClient
   class   Configuration
-    OPTIONS = [:api_key, :bucket_key, :origin, :destination, :method, :mode, :retriever_version].freeze
+    OPTIONS = [:api_key, :origin, :destination, :mode, :retriever_version].freeze
 
     attr_accessor :api_key
-    attr_accessor :bucket_key
     attr_accessor :origin
     attr_accessor :destination
-    attr_accessor :method
 
     attr_accessor :mode
     attr_accessor :retriever_version
 
     def initialize
-      @origin               = 'http://poxy.porta.sh'
-      @destination          = 'http://localhost:9292'
+      @origin               = 'http://poxy.ws'
+      @destination          = 'http://home.herokuapp.com/'
       @mode                 = 'development'
-      @method               = 'post'
       @retriever_version    = VERSION
     end
 
