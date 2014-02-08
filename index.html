@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Poxy client by Porta</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Poxy client</h1>
+        <p>Ruby client for Poxy, a weird service to capture requests, and do stuff with them.</p>
+
+        <p class="view"><a href="https://github.com/Porta/poxy_client">View the Project on GitHub <small>Porta/poxy_client</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/Porta/poxy_client/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Porta/poxy_client/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Porta/poxy_client">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="poxy_client" class="anchor" href="#poxy_client"><span class="octicon octicon-link"></span></a>poxy_client</h1>
+
+<p><a href="http://poxy.ws">Poxy</a> is a web application that captures HTTP requests to let you do fun stuff with them.</p>
+
+<p>Fun things like proxying, forwarding, emailing and some sort of processing (soon!).</p>
+
+<p>In order to use it first you'll need to <a href="http://poxy.ws/register">create an account</a> into the site.</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3>
+<a name="bundler" class="anchor" href="#bundler"><span class="octicon octicon-link"></span></a>Bundler</h3>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<pre><code>gem 'poxy_client'
+</code></pre>
+
+<p>And then execute:</p>
+
+<pre><code>$ bundle
+</code></pre>
+
+<h3>
+<a name="manual" class="anchor" href="#manual"><span class="octicon octicon-link"></span></a>Manual</h3>
+
+<pre><code>$ gem install poxy_client
+</code></pre>
+
+<h2>
+<a name="api-blueprint-and-documentation" class="anchor" href="#api-blueprint-and-documentation"><span class="octicon octicon-link"></span></a>API Blueprint and Documentation</h2>
+
+<p>Courtesy of the great service <a href="http://apiary.io/">Apiary.io</a>, here it is:
+<a href="http://docs.poxy.apiary.io/">http://docs.poxy.apiary.io/</a></p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>There are a few different ways to use the client.</p>
+
+<p>The distribution includes an executable file that you can use. It requires a .config file.</p>
+
+<p>Or, you can implement your own client suited to your particular needs. Take a look at the executable file, or check the code documentation.</p>
+
+<h3>
+<a name="executable" class="anchor" href="#executable"><span class="octicon octicon-link"></span></a>Executable</h3>
+
+<p>In the /lib folder of the distribution, there's a file named {file:bin/poxyd.rb poxyd.rb} which you can run from the commandline.</p>
+
+<p>It requires a mandatory config file (included in the distribution you'll find a sample one, here {file:poxy.conf ./poxy.conf}).</p>
+
+<p>You can use that as a start (it points to a test endpoint in the poxy api).</p>
+
+<p>Optionally, you can pass a -d parameter, and the executable will run as a daemon.</p>
+
+<p>Sample run:</p>
+
+<pre><code>$ ruby poxyd.rb -c poxy.conf -d
+</code></pre>
+
+<p>Being poxy.conf a config file with your own API and Bucket keys.</p>
+
+<h3>
+<a name="custom-implementation" class="anchor" href="#custom-implementation"><span class="octicon octicon-link"></span></a>Custom implementation</h3>
+
+<p>The code for {PoxyClient poxy_client} it's pretty straightforward.</p>
+
+<p>The {PoxyClient.perform perform} method encapsulates the 3 important operations the client does.</p>
+
+<h4>
+<a name="retrieve" class="anchor" href="#retrieve"><span class="octicon octicon-link"></span></a>Retrieve</h4>
+
+<h4>
+<a name="parse" class="anchor" href="#parse"><span class="octicon octicon-link"></span></a>Parse</h4>
+
+<h4>
+<a name="repeat" class="anchor" href="#repeat"><span class="octicon octicon-link"></span></a>Repeat</h4>
+
+<h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Porta">Porta</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
