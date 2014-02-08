@@ -40,9 +40,9 @@ Or, you can implement your own client suited to your particular needs. Take a lo
 
 ### Executable
 
-In the /lib folder of the distribution, there's a file named {file:bin/poxyd.rb poxyd.rb} which you can run from the commandline.
+In the /lib folder of the distribution, there's a file named [poxyd.rb](bin/poxyd.rb) which you can run from the commandline.
 
-It requires a mandatory config file (included in the distribution you'll find a sample one, here {file:poxy.conf ./poxy.conf}).
+It requires a mandatory config file (included in the distribution you'll find a sample one, here [poxy.conf](./poxy.conf).
 
 You can use that as a start (it points to a test endpoint in the poxy api).
 
@@ -56,9 +56,9 @@ Being poxy.conf a config file with your own API and Bucket keys.
 
 ### Custom implementation
 
-The code for {PoxyClient poxy_client} it's pretty straightforward.
+The code for [PoxyClient](lib/poxy_client.rb) it's pretty straightforward.
 
-The {PoxyClient.perform perform} method encapsulates the 3 important operations the client does.
+The [PoxyClient#perform](lib/poxy_client.rb#perform) perform method encapsulates the 3 important operations the client does.
 
 #### Retrieve
 
