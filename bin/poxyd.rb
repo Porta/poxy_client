@@ -25,10 +25,18 @@ args = Clap.run ARGV,
   },
   "-d" => lambda {
     opts[:daemonize] = true
+  },
+  "-v" => lambda {
+    opts[:version] = true
   }
 
 $stdout.sync = true
 
+
+if opts[:version]
+  puts "PoxyClient daemon, version: #{PoxyClient::VERSION}"
+  @continue = false
+end
 
 if opts[:daemonize]
   pid_path = File.expand_path("poxy.pid", File.dirname(__FILE__))
@@ -47,8 +55,7 @@ if opts[:config_file]
 
   PoxyClient.configure do |c|
     c.origin = config["origin"]
-    c.api_key = config["api"]
-    c.bucket_key = config["bucket"]
+    c.api_key = config["api_key"]
     c.destination = config["destination"]
   end
 

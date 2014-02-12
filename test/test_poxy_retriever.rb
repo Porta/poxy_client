@@ -27,11 +27,15 @@ class PoxyRetrieverTest < Test::Unit::TestCase
 
 
   def test_a_few_requests
-    response = @retriever.get(:search => "bucket_id: 1")
+    response = @retriever.get(:search => "bucket_id: 1", :page => 1, :per_page => 50)
     parsed = JSON.parse(response.body)
-    expected = {"item_count" => 3, "item_class" => "request"}
+    expected = { "item_count" => 3, "item_class" => "request", "page" => 1, "per_page" => 50 }
     assert_equal parsed["item_count"], expected["item_count"]
     assert_equal parsed["item_class"], expected["item_class"]
+    assert_equal parsed["page"], expected["page"]
+    assert_equal parsed["per_page"], expected["per_page"]
   end
+
+
 
 end

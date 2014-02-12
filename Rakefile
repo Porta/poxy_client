@@ -12,7 +12,7 @@ task :default => :test
 task :console do
   require 'irb'
   require 'irb/completion'
-  require 'my_gem' # You know what to do.
+  require 'poxy_client' # You know what to do.
   ARGV.clear
   IRB.start
 end

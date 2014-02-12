@@ -25,31 +25,39 @@ module PoxyClient
     # @param [Symbol] how_many which requests to retrieve from the API.
     # Options are :new, :all, :first, :last, :starred, :unstarred, :archived
     # @return [String] A JSON encoded array of requests.
-    def get(opts = {})
+    def get(options = {})
       #TODO: move to a factory
       copy = {}
 
-      if opts.has_key? :starred
-        copy[:starred] = opts[:starred].to_s
+      if options.has_key? :starred
+        copy[:starred] = options[:starred].to_s
       end
 
-      if opts.has_key? :archived
-        copy[:archived] = opts[:archived].to_s
+      if options.has_key? :archived
+        copy[:archived] = options[:archived].to_s
       end
 
-      if opts.has_key? :bucket_ids
-        copy[:bucket_ids] = opts[:bucket_ids]
+      if options.has_key? :bucket_ids
+        copy[:bucket_ids] = options[:bucket_ids]
       end
-      if opts.has_key? :search
-        copy[:search] = opts[:search].downcase
+      if options.has_key? :search
+        copy[:search] = options[:search].downcase
       end
       
+      if options.has_key? :page
+        copy[:page] = options[:page]
+      end
+
+      if options.has_key? :per_page
+        copy[:per_page] = options[:per_page]
+      end
+
       query = Rack::Utils.build_nested_query(copy)
 
       @connector = PoxyClient::Connector.new
       @connector.connect do |request|
         request.method = :get
-        request.url =  build_url(query)
+        request.url = build_url(query)
         request.auth.basic(@api_key, "")
       end
       @connector.response

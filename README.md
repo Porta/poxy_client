@@ -52,7 +52,7 @@ Sample run:
 	
 	$ ruby poxyd.rb -c poxy.conf -d
 
-Being poxy.conf a config file with your own API and Bucket keys.
+Being poxy.conf a config file with your own API key.
 
 ### Custom implementation
 
