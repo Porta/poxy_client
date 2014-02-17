@@ -15,13 +15,13 @@ class PoxyClientTest < Test::Unit::TestCase
 
   def test_config_block
     PoxyClient.configure do |config|
-      config.api_key = "3acb90c157c9f968d4e7d8929fd5264cc2c9693fa67a83911412ef9b6bfa95f6"
+      config.api_key = "3acb90c157c9f"
       config.destination = "http://home.herokuapp.com/"
     end
 
     @client = PoxyClient
     #params passed for config
-    assert_equal @client.configuration.api_key, "3acb90c157c9f968d4e7d8929fd5264cc2c9693fa67a83911412ef9b6bfa95f6"
+    assert_equal @client.configuration.api_key, "3acb90c157c9f"
     #params by default
     assert_equal @client.configuration.destination, "http://home.herokuapp.com/"
   end
@@ -29,7 +29,7 @@ class PoxyClientTest < Test::Unit::TestCase
   def test_integration
     PoxyClient.configure do |config|
       config.origin = "https://poxy.apiary.io"
-      config.api_key = "3acb90c157c9f968d4e7d8929fd5264cc2c9693fa67a83911412ef9b6bfa95f6"
+      config.api_key = "3acb90c157c9f"
       config.destination = "http://home.herokuapp.com/"
     end
 
