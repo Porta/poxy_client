@@ -45,5 +45,16 @@ class PoxyClientTest < Test::Unit::TestCase
     end
   end
 
+  def test_client_perform
+    PoxyClient.configure do |config|
+      config.origin = "https://poxy.apiary.io"
+      config.api_key = "3acb90c157c9f"
+      config.destination = "http://home.herokuapp.com/"
+    end
+
+    result = PoxyClient.perform(:starred => true)
+    assert_not_nil result
+  end
+
 
 end
