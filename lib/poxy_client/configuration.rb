@@ -5,7 +5,6 @@ module PoxyClient
     attr_accessor :api_key
     attr_accessor :origin
     attr_accessor :destination
-
     attr_accessor :mode
     attr_accessor :retriever_version
 

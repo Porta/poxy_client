@@ -38,12 +38,10 @@ class PoxyClientTest < Test::Unit::TestCase
     @repeater = PoxyClient.repeater
     requests = @retriever.get
     processed = PoxyClient.processor.parse(requests)
-    if processed["code"] == 200
-      processed["items"].each do |request|
-        responses = @repeater.set(request)
-        assert_not_nil responses.first.body.match('manolo')
-        assert_equal responses.first.code, 200
-      end
+    processed.each do |request|
+      responses = @repeater.set([request])
+      assert_not_nil responses.first.body.match('FooBar')
+      assert_equal responses.first.code, 200
     end
   end
 

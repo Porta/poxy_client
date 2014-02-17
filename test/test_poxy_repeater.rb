@@ -22,6 +22,7 @@ class PoxyRepeaterTest < Test::Unit::TestCase
 
   def test_repeater_set
     responses = @repeater.set(@json_request)
+
 	  #assert_equal response[0].class, HTTPI::Response
     assert_equal responses.first.code, 200 #poxy will respond with a 200, since it's a "receive" bucket
     assert responses.first.body.include?('Don Gato y su Pandilla'), "Don Gato not present" 

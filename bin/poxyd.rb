@@ -59,6 +59,8 @@ if opts[:config_file]
     c.destination = config["destination"]
   end
 
+else
+  @continue = false
 end
 
 
@@ -68,6 +70,6 @@ while @continue do
   #requests = PoxyClient.retriever.get(:all)
   #parsed = PoxyClient.processor.parse(requests)
   #result = PoxyClient.repeater.set(parsed)
-  PoxyClient.perform
+  PoxyClient.perform(:starred => true)
   sleep config["interval"].to_i
 end

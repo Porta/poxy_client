@@ -20,7 +20,7 @@ module PoxyClient
       json_array.each do |params|
         @connector.connect do |request|
           request.method = params["method"]
-          request.url = @destination << '?' << params["query_string"].to_s
+          request.url = @destination + '?' + params["query_string"].to_s
           request.headers = params["headers"]
           request.body = params["params"]
         end
@@ -28,6 +28,5 @@ module PoxyClient
       end
       @result
     end
-
   end
 end

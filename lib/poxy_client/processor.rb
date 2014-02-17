@@ -7,9 +7,8 @@ module PoxyClient
 
     # Parse the JSON encoded string from the retriever and generates an Object
     #
-    # NOTE: There's a X-FORWARDED-FOR header added here to every request.
     # @param [String] content The JSON encoded string from the retriever.
-    # @return [Object] The parsed (and modified) headers
+    # @return [Array] The list of items retrieved
     def parse(content)
       @response = []
       if ( content.respond_to?(:body) )
@@ -17,12 +16,21 @@ module PoxyClient
       else
         @response = JSON.parse(content)
       end
+      @complete_items = @response["items"]
+      @raw_items = @response["items"].map{|i| i['raw']}
     end
 
     def response
       @response
     end
 
+    def complete_items
+      @complete_items
+    end
+
+    def raw_items
+      @raw_items
+    end
 
   end
 end

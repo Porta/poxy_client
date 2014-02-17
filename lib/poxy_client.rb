@@ -37,17 +37,17 @@ module PoxyClient
 
     # Encapsulates the three important operations. Retrieve, Process and Repeat
     # 
-    # @param [Symbol] how_many which requests to retrieve from the API.
-    # Options are :new, :all, :first, :last, :starred, :unstarred, :archived
+    # @param [Hash] which kind of requests we should get from the API
+    # Options are :
     # @return [Array] With the responses received in the destination server.
-    def perform(options = {}) #TODO: FIX THIS
+    def perform(options = {}) #TODO: FIX DOCS
       # Retrieve all the available requests from the site API
-      requests = PoxyClient.retriever.get(options)
+      requests = PoxyClient.retriever.get( options )
       # Parse those requests to JSON.
-      parsed = PoxyClient.processor.parse(requests)
+      parsed = PoxyClient.processor.parse( requests )
       # Repeat the retrieved and parsed requests to (usually) localhost.
       # Check the sample poxy.conf file.
-      result = PoxyClient.repeater.set(parsed)
+      result = PoxyClient.repeater.set( parsed )
     end
 
   end
