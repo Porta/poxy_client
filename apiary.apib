@@ -1,0 +1,262 @@
+HOST: https://poxy.ws
+
+--- Poxy API v1 ---
+---
+Poxy API can access Buckets, Requests and a few other resources.
+
+As of v1, the API is read only. v2 will implement write operations to
+create and manage buckets and their requests. 
+
+
+
+> **Important:**
+ 
+
+> Authentication **is required** in all API requests (not Poxy requests).
+> Requests without proper authentication will receive a `401` error.
+____________ 
+> `https` **is required** for all the API Requests.
+> API Requests sent to `http` will receive a `403` (forbidden) error.
+
+###A few things to keep in mind:
+
+The Poxy API is a work in progress and it won't be changed without notice.
+Notices will be provided through different channels (twitter, email updates)
+
+The API isn't being rate limited, so behave.
+Or it will become rate limited. Consider yourself warned.
+     
+If you have a request or suggestion, drop us a note at [hola@poxy.ws](mailto://hola@poxy.ws) (We love notes)
+
+---
+
+
+-- Authentication
+
+Endpoint to test if your `api_key` is valid.
+
+You can get your `api_key` registering an account at [Poxy](https://poxy.ws/register)
+
+
+
+
+## Authentication
+HTTP Basic Authentication
+## Request Headers
+
+  Authorization: Basic *Base64* encoded string (your `api_key`).
+GET /api
+> Authorization: Basic dGVzdDo=
+< 200
+< Content-Type: application/json
+{
+    "code": "200",
+    "message": "Access Granted",
+    "details": "The api_key you provided is valid. You're good to go"
+}
++++++
+< 401
+< Content-Type: application/json
+{
+    "code": "401",
+    "message": "Access Denied",
+    "details": "The api_key you provided is invalid. You shall not pass"
+}
+
+-- Buckets
+
+# Get a list of your buckets
+
+Only authentication is required
+
+Buckets are the core of Poxy. They receive and store your requests.
+
+Check the [Documentation](https://poxy.ws/docs) for a detailed explanation.
+
+
+GET /api/buckets
+> Authorization: Basic dGVzdDo=
+< 200
+< Content-Type: application/json
+{
+    "code": "200",
+    "message": "Access to Buckets Granted",
+    "item_count": 3,
+    "item_class": "bucket",
+    "items": [
+        {
+            "id": 1,
+            "name": "my-bucket-name",
+            "url": "http://my-bucket-name.poxy.ws",
+            "request_count": 15
+        },
+        {
+            "id": 2,
+            "name": "another-one",
+            "url": "http://another-one.poxy.ws",
+            "request_count": 1
+        },
+        {
+            "id": 3,
+            "name": "ping",
+            "url": "http://ping.poxy.ws",
+            "request_count": 0
+        }
+    ]
+}
+
+-- Requests
+
+# Get a list of your requests
+This list will return the **processed** request (without the headers and body).
+To get the whole request content, you'll need to get that on a separate API call.
+
+## Available parameters (all values are optional and can be combined)
+
+    parameter name  | expected value
+    --------------------------------
+    bucket_id       | integer
+    starred         | true|false
+    archived        | true|false
+    search          | key:value
+    page            | integer
+    per_page        | integer
+    
+###Example queries:
+
+Without any filter:
+
+    /api/requests
+    => returns all the available requests
+
+Just starred requests:
+    
+    /api/requests?starred=
+    
+Bucket filtering:
+
+    /api/requets?bucket_id=1
+
+More complex query:
+
+    /api/requests?bucket_id=1&bucket_id=2&starred=false&search=method:POST,some_key:Some+value&page=1&per_page=50
+
+    => returns the 50 first paginated requests from
+        bucket_id 1 OR bucket_id 2 AND
+        That are not starred AND
+        That have a request_method == POST AND a param named some_key with a value of "Some value"
+
+GET /api/requests{?bucket_id*}{&starred}{&archived}{&search}{&page}{&per_page}
+> Authorization: Basic dGVzdDo=
+< 200
+< Content-Type: application/json
+{
+    "code": "200",
+    "message": "Access to Requests Granted",
+    "page": 1,
+    "per_page": 50,
+    "item_count": 3,
+    "item_class": "request",
+    "items": [
+        {
+            "id": 1,
+            "bucket_id": 1,
+            "starred": false,
+            "archived": false,
+            "processed": {
+                "method": "GET",
+                "origin": null,
+                "path": "/",
+                "params": {
+                },
+                "uploads": [  ]                
+            },
+            "raw": {
+                "method": "GET",
+                "path": "/",
+                "headers": {
+                    "HOST": "my-bucket-name.poxy.ws",
+                    "CONNECTION": "keep-alive",
+                    "CACHE_CONTROL": "no-cache",
+                    "USER_AGENT": "FooBar",
+                    "ACCEPT": "*/*",
+                    "ACCEPT_ENCODING": "gzip,deflate,sdch",
+                    "ACCEPT_LANGUAGE": "en-US,en;q=0.8,es;q=0.6"
+                },
+                "query_string": "",
+                "params": {},
+                "body": "",
+                "origin": null
+            }
+        },
+        {
+            "id": 2,
+            "bucket_id": 1,
+            "starred": true,
+            "archived": false,
+            "processed": {
+                "method": "POST",
+                "origin": null,
+                "path": "/",
+                "params": {
+                    "uno": "dos",
+                    "dos": "tres"
+                },
+                "uploads": [  ]                
+            },
+            "raw": {
+                "method": "POST",
+                "path": "/",
+                "headers": {
+                    "ACCEPT_LANGUAGE": "en-US,en;q=0.8,es;q=0.6",
+                    "CONNECTION": "keep-alive",
+                    "ACCEPT_ENCODING": "gzip,deflate,sdch",
+                    "ACCEPT": "*/*",
+                    "CACHE_CONTROL": "no-cache",
+                    "ORIGIN": "",
+                    "USER_AGENT": "FooBar",
+                    "HOST": "my-bucket-name.poxy.ws"
+                },
+                "query_string": "",
+                "params": {
+                    "uno": "dos",
+                    "dos": "tres"
+                },
+                "body": "------WebKitFormBoundaryJchAQzyXrTzJl9eq\r\nContent-Disposition: form-data; name=\"uno\"\r\n\r\ndos\r\n------WebKitFormBoundaryJchAQzyXrTzJl9eq\r\nContent-Disposition: form-data; name=\"dos\"\r\n\r\ntres\r\n------WebKitFormBoundaryJchAQzyXrTzJl9eq--\r\n",
+                "origin": ""
+            }
+        } ,
+        {
+            "id": 3,
+            "bucket_id": 2,
+            "starred": false,
+            "archived": true,
+            "processed": {
+                "method": "GET",
+                "origin": null,
+                "path": "/",
+                "params": {
+                },
+                "uploads": [  ]                
+            },
+            "raw": {
+                "method": "GET",
+                "path": "/",
+                "headers": {
+                    "HOST": "another-one.poxy.ws",
+                    "CONNECTION": "keep-alive",
+                    "CACHE_CONTROL": "no-cache",
+                    "USER_AGENT": "FooBar",
+                    "ACCEPT": "*/*",
+                    "ACCEPT_ENCODING": "gzip,deflate,sdch",
+                    "ACCEPT_LANGUAGE": "en-US,en;q=0.8,es;q=0.6"
+                },
+                "query_string": "",
+                "params": {},
+                "body": "",
+                "origin": null
+            }
+        }
+    ]
+}
+
